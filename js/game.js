@@ -8,7 +8,7 @@
     canvas.addEventListener('mousemove', mouse);
 
     var springs = [];
-    var n = 8
+    var n = 6
     var gameStat = true;
     var winPositions = []
     bounce = { x: 0, y: 0 }
