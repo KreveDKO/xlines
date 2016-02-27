@@ -127,6 +127,7 @@
         for (var i = 0; i < springs.length; i++) {            
             if (springs[i].marked) {springs.splice(i, 1);}
         }
+        changeBouncePos();
         move();
         
     }
@@ -143,7 +144,6 @@
                 springs[i].marked = false;
             }
         }
-        changeBouncePos();
         move();
     }
 
