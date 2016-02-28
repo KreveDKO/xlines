@@ -2,8 +2,8 @@
     var canvas = document.getElementById('c');
     var ctx = canvas.getContext('2d');
 
-    canvas.width = 840;
-    canvas.height = 480;
+    canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     canvas.addEventListener('mousedown', mouseClick);
     canvas.addEventListener('mousemove', mouse);
 
