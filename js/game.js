@@ -125,10 +125,13 @@
 
 	function mouseClick(e) {
 		for (var i = 0; i < springs.length; i++) {            
-			if (springs[i].marked && springs.length > 3) {springs.splice(i, 1);return;}
+			if (springs[i].marked && springs.length > 3) {
+				springs.splice(i, 1);return;
+				changeBouncePos();
+				move();
+			}
 		}
-		changeBouncePos();
-		move();
+		
 	}
 
 	function mouse(e) {
@@ -152,7 +155,7 @@
 			}
 			*/
 		}
-	move();
+		move();
 	}
 	function roundOver(){
 
