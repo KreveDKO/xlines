@@ -6,7 +6,7 @@
 	canvas.height = (document.documentElement.clientHeight || document.body.clientHeight) * 0.95;
 	canvas.addEventListener('mousedown', mouseClick);
 	canvas.addEventListener('mousemove', mouse);
-	canvas.addEventListener('touchstart',touchDown);
+	canvas.addEventListener('touchstart',touchDown, false);
 
 	var springs = [];
 	var n = 6
