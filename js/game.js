@@ -6,6 +6,7 @@
     canvas.height = (document.documentElement.clientHeight || document.body.clientHeight) * 0.95;
     canvas.addEventListener('mousedown', mouseClick);
     canvas.addEventListener('mousemove', mouse);
+	canvas.addEventListener('touchStart',touchDown);
 
     var springs = [];
     var n = 6
@@ -156,7 +157,16 @@
         }
         move();
     }
-
+	function touchDown(e){
+		for (var i = 0; i < springs.length; i++) 
+		{
+            var dx = Math.abs(e.clientX - springs[i].x)
+			var dy = Math.abs(e.clientY - springs[i].y)
+			if (dx < 10 && dy <= 10 ){
+				springs.splice(i, 1);
+			}			
+		}
+	}
     function roundOver(){
 
         if (findPointPosInWinPositions(bounce) != -1){
