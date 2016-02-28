@@ -1,0 +1,7 @@
+#c:active
+{
+	cursor: pointer;
+}
+#c{
+	cursor: url(../image/scissors.cur), pointer;
+}
