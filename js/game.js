@@ -11,8 +11,8 @@
     var n = 6
     var gameStat = true;
     var winPositions = []
-    bounce = { x: 0, y: 0 }
-    realBounce = {x: 0, y: 0}
+    var bounce = { x: 0, y: 0 }
+    var realBounce = {x: 0, y: 0}
     var score = 0;
     var highScore = 0;
 
@@ -125,7 +125,7 @@
 
     function mouseClick(e) {
         for (var i = 0; i < springs.length; i++) {            
-            if (springs[i].marked) {springs.splice(i, 1);}
+            if (springs[i].marked && springs.length > 3) {springs.splice(i, 1);}
         }
         changeBouncePos();
         move();
@@ -134,6 +134,15 @@
 
     function mouse(e) {
         for (var i = 0; i < springs.length; i++) {
+            var dx = Math.abs(e.clientX - springs[i].x)
+			var dy = Math.abs(e.clientY - springs[i].y)
+			if (dx < 10 && dy <= 10 ){
+				springs[i].marked = true;
+			}
+			else{
+				springs[i].marked = false;
+			}
+            /*
             var dx = (e.clientX-realBounce.x)/(springs[i].x-realBounce.x);
             var dy = (e.clientY-realBounce.y)/(springs[i].y-realBounce.y);
             if (Math.abs(dx - dy) <= .1 && (e.clientX <= realBounce.x && e.clientX >= springs[i].x || e.clientX >= realBounce.x && e.clientX <= springs[i].x))
@@ -143,6 +152,7 @@
             else {
                 springs[i].marked = false;
             }
+            */
         }
         move();
     }
