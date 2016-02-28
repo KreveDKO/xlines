@@ -158,6 +158,7 @@
         move();
     }
 	function touchDown(e){
+		event.preventDefault();
 		alert("X="+e.targetTouches[0].pageX+" Y="+e.targetTouches[0].pageY)
 		for (var i = 0; i < springs.length; i++) 
 		{
