@@ -158,13 +158,14 @@
         move();
     }
 	function touchDown(e){
+		alert("X="+e.targetTouches[0].pageX+" Y="+e.targetTouches[0].pageY)
 		for (var i = 0; i < springs.length; i++) 
 		{
-            var dx = Math.abs(e.targetTouches[0].pageX - springs[i].x)
+		 	var dx = Math.abs(e.targetTouches[0].pageX - springs[i].x)
 			var dy = Math.abs(e.targetTouches[0].pageY - springs[i].y)
-			if (dx < 10 && dy <= 10 ){
-				springs.splice(i, 1);
-			}			
+				if (dx < 10 && dy <= 10 ){
+					springs.splice(i, 1);
+				}			
 		}
 	}
     function roundOver(){
