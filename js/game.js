@@ -1,141 +1,140 @@
 ;(function(){
-    var canvas = document.getElementById('c');
-    var ctx = canvas.getContext('2d');
+	var canvas = document.getElementById('c');
+	var ctx = canvas.getContext('2d');
 
-    canvas.width = (document.documentElement.clientWidth || document.body.clientWidth) * 0.95;
-    canvas.height = (document.documentElement.clientHeight || document.body.clientHeight) * 0.95;
-    canvas.addEventListener('mousedown', mouseClick);
-    canvas.addEventListener('mousemove', mouse);
-	canvas.addEventListener('touchStart',touchDown);
+	canvas.width = (document.documentElement.clientWidth || document.body.clientWidth) * 0.95;
+	canvas.height = (document.documentElement.clientHeight || document.body.clientHeight) * 0.95;
+	canvas.addEventListener('mousedown', mouseClick);
+	canvas.addEventListener('mousemove', mouse);
+	canvas.addEventListener('touchstart',touchDown);
 
-    var springs = [];
-    var n = 6
-    var gameStat = true;
-    var winPositions = []
-    var bounce = { x: 0, y: 0 }
-    var realBounce = {x: 0, y: 0}
-    var score = 0;
-    var highScore = 0;
+	var springs = [];
+	var n = 6
+	var gameStat = true;
+	var winPositions = []
+	var bounce = { x: 0, y: 0 }
+	var realBounce = {x: 0, y: 0}
+	var score = 0;
+	var highScore = 0;
 
-    function newGame(n){
-        springs = []
-        winPositions = []
-        for (var i = 0; i < n; i++) {
-            var x = Math.floor((Math.random() * (canvas.width-280)) + 30);
-            var y = Math.floor((Math.random() * (canvas.height- 30)) + 30);
-            springs.push(new spring(x,y));
-        };
-        changeBouncePos();
-        realBounce.x = bounce.x;
-        realBounce.y = bounce.y;
-            for (var i=0; i<3; i++){
-                var wp = winPosition();
-                while (findPointPosInWinPositions(wp) != -1){wp = winPosition();}
-                winPositions.push(wp);
-            }        
-    }
+	function newGame(n){
+		springs = []
+		winPositions = []
+		for (var i = 0; i < n; i++) {
+			var x = Math.floor((Math.random() * (canvas.width-280)) + 30);
+			var y = Math.floor((Math.random() * (canvas.height- 30)) + 30);
+			springs.push(new spring(x,y));
+		};
+		changeBouncePos();
+		realBounce.x = bounce.x;
+		realBounce.y = bounce.y;
+		for (var i=0; i<3; i++){
+			var wp = winPosition();
+			while (findPointPosInWinPositions(wp) != -1){wp = winPosition();}
+			winPositions.push(wp);
+		}        
+	}
 
-    function winPosition(){
-        var avgX = 0;
-        var avgY = 0;
-        var n = Math.floor((Math.random() * springs.length) + 1);
-        for (var i = n; i < n+3; i++){
-            avgX += springs[i % springs.length].x;
-            avgY += springs[i % springs.length].y;
-        }     
-        return {x: avgX / 3, y: avgY /= 3};
-    }
+	function winPosition(){
+		var avgX = 0;
+		var avgY = 0;
+		var n = Math.floor((Math.random() * springs.length) + 1);
+		for (var i = n; i < n+3; i++){
+			avgX += springs[i % springs.length].x;
+			avgY += springs[i % springs.length].y;
+		}     
+		return {x: avgX / 3, y: avgY /= 3};
+	}
 
-    function findPointPosInWinPositions(wp){
-        for (var i = 0; i < winPositions.length; i++)
-            if ((winPositions[i].x == wp.x) && winPositions[i].y == wp.y){return i}
-        return -1
-    }
+	function findPointPosInWinPositions(wp){
+		for (var i = 0; i < winPositions.length; i++)
+			if ((winPositions[i].x == wp.x) && winPositions[i].y == wp.y){return i}
+		return -1
+	}
 
-    function spring(x, y, len){
-        this.x = x;
-        this.y = y;
-        this.marked = false;
-    }
+	function spring(x, y, len){
+		this.x = x;
+		this.y = y;
+		this.marked = false;
+	}
 
     newGame(n);
     move();
 
-    setInterval(function() {
-        move();
-    },10);
+	setInterval(function() {
+		move();
+	},10);
 
-    function changeBouncePos(){
-        var avgX = 0;
-        var avgY = 0;
-        for (var i = 0; i < springs.length; i++) {
-            ctx.closePath();
-            avgX += springs[i].x;
-            avgY += springs[i].y;
-        }
-        avgY /= springs.length;
-        avgX /= springs.length;
-        bounce.x = avgX;
-        bounce.y = avgY;
-    }
+	function changeBouncePos(){
+		var avgX = 0;
+		var avgY = 0;
+		for (var i = 0; i < springs.length; i++) {
+			ctx.closePath();
+			avgX += springs[i].x;
+			avgY += springs[i].y;
+		}
+		avgY /= springs.length;
+		avgX /= springs.length;
+		bounce.x = avgX;
+		bounce.y = avgY;
+	}
 
-    function changeRealBouncePos(){
-        realBounce.x -= (realBounce.x-bounce.x)/100;
-        realBounce.y -= (realBounce.y-bounce.y)/100;
-    }
+	function changeRealBouncePos(){
+		realBounce.x -= (realBounce.x-bounce.x)/100;
+		realBounce.y -= (realBounce.y-bounce.y)/100;
+	}
 
-    function move() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        changeRealBouncePos();
+	function move() {
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		changeRealBouncePos();
 
-        ctx.font="20px Georgia";
-        ctx.fillText("Level: "+(n-5),canvas.width-200, 30);
-        ctx.fillText("Score: "+score,canvas.width-200, 50);
-        ctx.fillText("High score: "+highScore,canvas.width-200, 70);
+		ctx.font="20px Georgia";
+		ctx.fillText("Level: "+(n-5),canvas.width-200, 30);
+		ctx.fillText("Score: "+score,canvas.width-200, 50);
+		ctx.fillText("High score: "+highScore,canvas.width-200, 70);
 
-        GreenYellowRed = ['#0f0','#ff0','#f00']
-        for (var i = 0; i < winPositions.length; i++) {
-            ctx.beginPath();
-            ctx.strokeStyle = GreenYellowRed[i]
-            ctx.arc(winPositions[i].x,winPositions[i].y,12,0,2*Math.PI);
-            ctx.stroke();
-            ctx.closePath();
-        };
+		GreenYellowRed = ['#0f0','#ff0','#f00']
+		for (var i = 0; i < winPositions.length; i++) {
+			ctx.beginPath();
+			ctx.strokeStyle = GreenYellowRed[i]
+			ctx.arc(winPositions[i].x,winPositions[i].y,12,0,2*Math.PI);
+			ctx.stroke();
+			ctx.closePath();
+		};
 
-        for (var i = 0; i < springs.length; i++) {
-            ctx.beginPath();
-            ctx.moveTo(realBounce.x,realBounce.y);
-            ctx.lineTo(springs[i].x, springs[i].y);
-            if (springs[i].marked) ctx.strokeStyle = '#00f';
-            else ctx.strokeStyle = '#000';
-            ctx.stroke();
-            ctx.closePath();
-            ctx.beginPath();
-            ctx.arc(springs[i].x,springs[i].y,5,0,2*Math.PI);
-            ctx.fill();
-            ctx.closePath();
-        }
+		for (var i = 0; i < springs.length; i++) {
+			ctx.beginPath();
+			ctx.moveTo(realBounce.x,realBounce.y);
+			ctx.lineTo(springs[i].x, springs[i].y);
+			if (springs[i].marked) ctx.strokeStyle = '#00f';
+			else ctx.strokeStyle = '#000';
+			ctx.stroke();
+			ctx.closePath();
+			ctx.beginPath();
+			ctx.arc(springs[i].x,springs[i].y,5,0,2*Math.PI);
+			ctx.fill();
+			ctx.closePath();
+		}
 
-        ctx.beginPath();
-        ctx.arc(realBounce.x,realBounce.y,10,10,0,2*Math.PI);
-        ctx.fill();
-        ctx.closePath();
-        if (springs.length <= winPositions.length && (Math.abs(realBounce.x-bounce.x) <= 1) && (Math.abs(realBounce.y-bounce.y) <= 1))
-            roundOver();
-    }
+		ctx.beginPath();
+		ctx.arc(realBounce.x,realBounce.y,10,10,0,2*Math.PI);
+		ctx.fill();
+		ctx.closePath();
+		if (springs.length <= winPositions.length && (Math.abs(realBounce.x-bounce.x) <= 1) && (Math.abs(realBounce.y-bounce.y) <= 1))
+			roundOver();
+	}
 
-    function mouseClick(e) {
-        for (var i = 0; i < springs.length; i++) {            
-            if (springs[i].marked && springs.length > 3) {springs.splice(i, 1);}
-        }
-        changeBouncePos();
-        move();
-        
-    }
+	function mouseClick(e) {
+		for (var i = 0; i < springs.length; i++) {            
+			if (springs[i].marked && springs.length > 3) {springs.splice(i, 1);return;}
+		}
+		changeBouncePos();
+		move();
+	}
 
-    function mouse(e) {
-        for (var i = 0; i < springs.length; i++) {
-            var dx = Math.abs(e.clientX - springs[i].x)
+	function mouse(e) {
+		for (var i = 0; i < springs.length; i++) {
+			var dx = Math.abs(e.clientX - springs[i].x)
 			var dy = Math.abs(e.clientY - springs[i].y)
 			if (dx < 10 && dy <= 10 ){
 				springs[i].marked = true;
@@ -143,49 +142,48 @@
 			else{
 				springs[i].marked = false;
 			}
-            /*
-            var dx = (e.clientX-realBounce.x)/(springs[i].x-realBounce.x);
-            var dy = (e.clientY-realBounce.y)/(springs[i].y-realBounce.y);
-            if (Math.abs(dx - dy) <= .1 && (e.clientX <= realBounce.x && e.clientX >= springs[i].x || e.clientX >= realBounce.x && e.clientX <= springs[i].x))
-            {
-                springs[i].marked = true;
-            }
-            else {
-                springs[i].marked = false;
-            }
-            */
-        }
-        move();
-    }
+			/*
+			var dx = (e.clientX-realBounce.x)/(springs[i].x-realBounce.x);
+			var dy = (e.clientY-realBounce.y)/(springs[i].y-realBounce.y);
+			if (Math.abs(dx - dy) <= .1 && (e.clientX <= realBounce.x && e.clientX >= springs[i].x || e.clientX >= realBounce.x && e.clientX <= springs[i].x)){
+				springs[i].marked = true;
+			}
+			else {
+				springs[i].marked = false;
+			}
+			*/
+		}
+	move();
+	}
 	function touchDown(e){
-		event.preventDefault();
-		alert("X="+e.targetTouches[0].pageX+" Y="+e.targetTouches[0].pageY)
+
 		for (var i = 0; i < springs.length; i++) 
 		{
-		 	var dx = Math.abs(e.targetTouches[0].pageX - springs[i].x)
+
+			var dx = Math.abs(e.targetTouches[0].pageX - springs[i].x)
 			var dy = Math.abs(e.targetTouches[0].pageY - springs[i].y)
-				if (dx < 10 && dy <= 10 ){
-					springs.splice(i, 1);
-				}			
+			if (dx < 10 && dy <= 10 ){
+				springs.splice(i, 1);
+			}			
 		}
 	}
-    function roundOver(){
+	function roundOver(){
 
-        if (findPointPosInWinPositions(bounce) != -1){
-            n++;
-            score += (3-findPointPosInWinPositions(bounce))*50
-            if (score > highScore)
-                highScore = score
-            newGame(n);
-            
-        }
-        else {
-            n = 6;
-            if (score > highScore)
-                highScore = score;
-            score = 0;
-            newGame(n);
-        }
-    }
+		if (findPointPosInWinPositions(bounce) != -1){
+			n++;
+			score += (3-findPointPosInWinPositions(bounce))*50
+		if (score > highScore)
+			highScore = score
+		newGame(n);
+
+		}
+		else {
+			n = 6;
+			if (score > highScore)
+				highScore = score;
+			score = 0;
+			newGame(n);
+		}
+	}
 
 })();
