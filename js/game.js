@@ -2,8 +2,10 @@
 	var canvas = document.getElementById('c');
 	var ctx = canvas.getContext('2d');
 
-	canvas.width = (document.documentElement.clientWidth || document.body.clientWidth) * 0.95;
-	canvas.height = (document.documentElement.clientHeight || document.body.clientHeight) * 0.95;
+	//canvas.width = (document.documentElement.clientWidth || document.body.clientWidth) * 0.95;
+	//canvas.height = (document.documentElement.clientHeight || document.body.clientHeight) * 0.95;
+	canvas.width = 600;
+	canvas.height = 800;
 	canvas.addEventListener('mousedown', mouseClick);
 	canvas.addEventListener('mousemove', mouse);
 	canvas.addEventListener('touchstart',touchDown);
@@ -98,10 +100,11 @@
 			ctx.beginPath();
 			ctx.strokeStyle = GreenYellowRed[i]
 			ctx.arc(winPositions[i].x,winPositions[i].y,12,0,2*Math.PI);
+			ctx.lineWidth = 5;
 			ctx.stroke();
 			ctx.closePath();
 		};
-
+		ctx.lineWidth = 1;
 		for (var i = 0; i < springs.length; i++) {
 			ctx.beginPath();
 			ctx.moveTo(realBounce.x,realBounce.y);
@@ -124,22 +127,12 @@
 			roundOver();
 	}
 
-	function mouseClick(e) {
-		for (var i = 0; i < springs.length; i++) {            
-			if (springs[i].marked && springs.length > 3) {
-				springs.splice(i, 1);
-				changeBouncePos();
-				move();
-				return;
-			}
-		}
-		
-	}
-
+	
 	function mouse(e) {
+		var rect = canvas.getBoundingClientRect();
 		for (var i = 0; i < springs.length; i++) {
-			var dx = Math.abs(e.clientX - springs[i].x)
-			var dy = Math.abs(e.clientY - springs[i].y)
+			var dx = Math.abs(e.clientX - rect.left - springs[i].x)
+			var dy = Math.abs(e.clientY - rect.top - springs[i].y)
 			if (dx < 10 && dy <= 10 ){
 				springs[i].marked = true;
 			}
@@ -159,12 +152,23 @@
 		}
 		move();
 	}
+	function mouseClick(e) {
+		for (var i = 0; i < springs.length; i++) {            
+			if (springs[i].marked && springs.length > 3) {
+				springs.splice(i, 1);
+				changeBouncePos();
+				move();
+				return;
+			}
+		}	
+	}
 	function touchDown(e){
 		e.preventDefault();
+		var rect = canvas.getBoundingClientRect();
 		for (var i = 0; i < springs.length; i++) 
 		{
-			var dx = Math.abs(e.targetTouches[0].pageX - springs[i].x)
-			var dy = Math.abs(e.targetTouches[0].pageY - springs[i].y)
+			var dx = Math.abs(e.targetTouches[0].pageX - rect.left - springs[i].x)
+			var dy = Math.abs(e.targetTouches[0].pageY - rect.top - springs[i].y)
 			if (dx < 30 && dy <= 30 && springs.length > 3){
 				springs.splice(i, 1);
 				changeBouncePos();

@@ -1,7 +1,26 @@
-#c:active
-{
-	cursor: pointer;
+body{
+	margin: 80px 0;
+	background: #AA92D2;
+}
+.container{
+	width: 600px;
+	margin: 0 auto;
+}
+.header{
+	color: #38176E;
+}
+.game-intro{
+	margin-top: 0;
+	font-size: 18px;
+	color: #4E288D;
+}
+.game-container{
+	border: 1px solid black;
 }
 #c{
 	cursor: url(../image/scissors.cur), pointer;
+}
+#c:active
+{
+	cursor: pointer;
 }
