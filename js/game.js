@@ -166,9 +166,12 @@
 			var dy = Math.abs(e.targetTouches[0].pageY - springs[i].y)
 			if (dx < 30 && dy <= 30 ){
 				springs.splice(i, 1);
+				changeBouncePos();
+				move();
+				return;
 			}			
 		}
-		move();
+		
 	}
 	function roundOver(){
 
