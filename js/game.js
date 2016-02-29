@@ -165,7 +165,7 @@
 		{
 			var dx = Math.abs(e.targetTouches[0].pageX - springs[i].x)
 			var dy = Math.abs(e.targetTouches[0].pageY - springs[i].y)
-			if (dx < 30 && dy <= 30 ){
+			if (dx < 30 && dy <= 30 && springs.length > 3){
 				springs.splice(i, 1);
 				changeBouncePos();
 				move();
