@@ -197,7 +197,7 @@
 		return;
 
 		}
-		if (findPointPosInWinPositions(bounce) == -1 && lifes <= 1){
+		if (findPointPosInWinPositions(bounce) == -1 && lifes < 1){
 			n = 6;
 			lifes = 0;
 			score = 0;
