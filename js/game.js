@@ -10,7 +10,7 @@
 	canvas.addEventListener('mousedown', mouseClick);
 	canvas.addEventListener('mousemove', mouse);
 	canvas.addEventListener('touchstart',touchDown);
-	
+	var mobilerect = canvas.getBoundingClientRect();
 	var springs = [];
 	var n = 6
 	var gameStat = true;
@@ -169,11 +169,11 @@
 	}
 	function touchDown(e){
 		e.preventDefault();
-		var rect = canvas.getBoundingClientRect();
+		
 		for (var i = 0; i < springs.length; i++) 
 		{
-			var dx = Math.abs(e.targetTouches[0].pageX - rect.left - springs[i].x)
-			var dy = Math.abs(e.targetTouches[0].pageY - rect.top - springs[i].y)
+			var dx = Math.abs(e.targetTouches[0].pageX - mobilerect.left - springs[i].x)
+			var dy = Math.abs(e.targetTouches[0].pageY - mobilerect.top - springs[i].y)
 			if (dx < 30 && dy <= 30 && springs.length > 3){
 				springs.splice(i, 1);
 				changeBouncePos();
