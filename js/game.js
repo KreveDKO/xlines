@@ -1,9 +1,10 @@
 ;(function(){
 	var canvas = document.getElementById('c');
 	var ctx = canvas.getContext('2d');
-
+	myStorage = localStorage;
 	//canvas.width = (document.documentElement.clientWidth || document.body.clientWidth) * 0.95;
 	//canvas.height = (document.documentElement.clientHeight || document.body.clientHeight) * 0.95;
+	
 	canvas.width = 800;
 	canvas.height = 1000;
 	canvas.addEventListener('mousedown', mouseClick);
@@ -19,7 +20,9 @@
 	var score = 0;
 	var highScore = 0;
 	var lifes = 0;
-
+	
+	if (myStorage.getItem('highScore') != undefined)
+		highScore = parseInt(myStorage.getItem('highScore'))
 	function newGame(n){
 		springs = [];
 		winPositions = [];
@@ -186,16 +189,16 @@
 			n++;
 			score += (3-findPointPosInWinPositions(bounce))*50
 			lifes += (2-findPointPosInWinPositions(bounce))
-		if (score > highScore)
+		if (score > highScore){
 			highScore = score
+			myStorage.setItem('highScore',highScore)
+		}
 		newGame(n);
 		return;
 
 		}
 		if (findPointPosInWinPositions(bounce) == -1 && lifes == 0){
 			n = 6;
-			if (score > highScore)
-				highScore = score;
 			score = 0;
 			newGame(n);
 			return;
