@@ -18,10 +18,11 @@
 	var realBounce = {x: 0, y: 0}
 	var score = 0;
 	var highScore = 0;
+	var lifes = 0;
 
 	function newGame(n){
-		springs = []
-		winPositions = []
+		springs = [];
+		winPositions = [];
 		for (var i = 0; i < n; i++) {
 			var x = Math.floor((Math.random() * (canvas.width-280)) + 30);
 			var y = Math.floor((Math.random() * (canvas.height- 30)) + 30);
@@ -94,6 +95,7 @@
 		ctx.fillText("Level: "+(n-5),canvas.width-200, 30);
 		ctx.fillText("Score: "+score,canvas.width-200, 50);
 		ctx.fillText("High score: "+highScore,canvas.width-200, 70);
+		ctx.fillText("Lifes: "+lifes,canvas.width-200, 90);
 
 		GreenYellowRed = ['#0f0','#ff0','#f00']
 		for (var i = 0; i < winPositions.length; i++) {
@@ -183,17 +185,26 @@
 		if (findPointPosInWinPositions(bounce) != -1){
 			n++;
 			score += (3-findPointPosInWinPositions(bounce))*50
+			lifes += (2-findPointPosInWinPositions(bounce))
 		if (score > highScore)
 			highScore = score
 		newGame(n);
+		return;
 
 		}
-		else {
+		if (findPointPosInWinPositions(bounce) == -1 && lifes == 0){
 			n = 6;
 			if (score > highScore)
 				highScore = score;
 			score = 0;
 			newGame(n);
+			return;
+		}
+		if (findPointPosInWinPositions(bounce) == -1 && lifes > 0){
+			lifes -= 1;
+			score -= 25;
+			newGame(n)
+			return;
 		}
 	}
 
