@@ -187,8 +187,8 @@
 
 		if (findPointPosInWinPositions(bounce) != -1){
 			n++;
-			score += (3-findPointPosInWinPositions(bounce))*50
-			lifes += (2-findPointPosInWinPositions(bounce))
+			score += (3-findPointPosInWinPositions(bounce))*50;
+			lifes += (2-findPointPosInWinPositions(bounce)) * 0.5;
 		if (score > highScore){
 			highScore = score
 			myStorage.setItem('highScore',highScore)
@@ -197,8 +197,9 @@
 		return;
 
 		}
-		if (findPointPosInWinPositions(bounce) == -1 && lifes == 0){
+		if (findPointPosInWinPositions(bounce) == -1 && lifes <= 1){
 			n = 6;
+			lifes = 0;
 			score = 0;
 			newGame(n);
 			return;
