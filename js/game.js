@@ -4,8 +4,8 @@
 
 	//canvas.width = (document.documentElement.clientWidth || document.body.clientWidth) * 0.95;
 	//canvas.height = (document.documentElement.clientHeight || document.body.clientHeight) * 0.95;
-	canvas.width = 600;
-	canvas.height = 800;
+	canvas.width = 800;
+	canvas.height = 1000;
 	canvas.addEventListener('mousedown', mouseClick);
 	canvas.addEventListener('mousemove', mouse);
 	canvas.addEventListener('touchstart',touchDown);
