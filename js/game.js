@@ -97,7 +97,7 @@
 		ctx.fillText("High score: "+highScore,canvas.width-200, 70);
 		ctx.fillText("Lifes: "+lifes,canvas.width-200, 90);
 
-		GreenYellowRed = ['#0f0','#ff0','#f00']
+		GreenYellowRed = ['#76E42F','#FF9E34','#EB305F']
 		for (var i = 0; i < winPositions.length; i++) {
 			ctx.beginPath();
 			ctx.strokeStyle = GreenYellowRed[i]
@@ -111,8 +111,8 @@
 			ctx.beginPath();
 			ctx.moveTo(realBounce.x,realBounce.y);
 			ctx.lineTo(springs[i].x, springs[i].y);
-			if (springs[i].marked) ctx.strokeStyle = '#00f';
-			else ctx.strokeStyle = '#000';
+			if (springs[i].marked) ctx.strokeStyle = '#06688E';
+			else ctx.strokeStyle = '#012533';
 			ctx.stroke();
 			ctx.closePath();
 			ctx.beginPath();
