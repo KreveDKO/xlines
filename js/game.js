@@ -1,6 +1,7 @@
-;(function(){
+//;(function(){
 	var canvas = document.getElementById('c');
 	var ctx = canvas.getContext('2d');
+	
 	myStorage = localStorage;
 	//canvas.width = (document.documentElement.clientWidth || document.body.clientWidth) * 0.95;
 	//canvas.height = (document.documentElement.clientHeight || document.body.clientHeight) * 0.95;
@@ -10,7 +11,7 @@
 	canvas.addEventListener('mousedown', mouseClick);
 	canvas.addEventListener('mousemove', mouse);
 	canvas.addEventListener('touchstart',touchDown);
-	var mobilerect = canvas.getBoundingClientRect();
+	
 	var springs = [];
 	var n = 6
 	var gameStat = true;
@@ -20,6 +21,7 @@
 	var score = 0;
 	var highScore = 0;
 	var lifes = 0;
+	var mobilerect = canvas.getBoundingClientRect();
 	
 	if (myStorage.getItem('highScore') != undefined)
 		highScore = parseInt(myStorage.getItem('highScore'))
@@ -91,6 +93,8 @@
 	}
 
 	function move() {
+		var nailTexture = new Image();
+		nailTexture.src = 'image/nailTexture.png'
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 		changeRealBouncePos();
 
@@ -118,10 +122,12 @@
 			else ctx.strokeStyle = '#012533';
 			ctx.stroke();
 			ctx.closePath();
-			ctx.beginPath();
+			/*ctx.beginPath();
 			ctx.arc(springs[i].x,springs[i].y,5,0,2*Math.PI);
 			ctx.fill();
-			ctx.closePath();
+			ctx.closePath();*/
+			ctx.drawImage(nailTexture,springs[i].x-12,springs[i].y-10,25,25)
+			
 		}
 
 		ctx.beginPath();
@@ -143,17 +149,7 @@
 			}
 			else{
 				springs[i].marked = false;
-			}
-			/*
-			var dx = (e.clientX-realBounce.x)/(springs[i].x-realBounce.x);
-			var dy = (e.clientY-realBounce.y)/(springs[i].y-realBounce.y);
-			if (Math.abs(dx - dy) <= .1 && (e.clientX <= realBounce.x && e.clientX >= springs[i].x || e.clientX >= realBounce.x && e.clientX <= springs[i].x)){
-				springs[i].marked = true;
-			}
-			else {
-				springs[i].marked = false;
-			}
-			*/
+			}		
 		}
 		move();
 	}
@@ -169,12 +165,11 @@
 	}
 	function touchDown(e){
 		e.preventDefault();
-		
 		for (var i = 0; i < springs.length; i++) 
 		{
 			var dx = Math.abs(e.targetTouches[0].pageX - mobilerect.left - springs[i].x)
 			var dy = Math.abs(e.targetTouches[0].pageY - mobilerect.top - springs[i].y)
-			if (dx < 30 && dy <= 30 && springs.length > 3){
+			if (dx < 40 && dy <= 40 && springs.length > 3){
 				springs.splice(i, 1);
 				changeBouncePos();
 				move();
@@ -187,8 +182,8 @@
 
 		if (findPointPosInWinPositions(bounce) != -1){
 			n++;
-			score += (3-findPointPosInWinPositions(bounce))*50;
-			lifes += (2-findPointPosInWinPositions(bounce)) * 0.5;
+			score += (3-findPointPosInWinPositions(bounce))*50
+			lifes += (2-findPointPosInWinPositions(bounce)) * 0.5
 		if (score > highScore){
 			highScore = score
 			myStorage.setItem('highScore',highScore)
@@ -197,7 +192,7 @@
 		return;
 
 		}
-		if (findPointPosInWinPositions(bounce) == -1 && lifes < 1){
+		if (findPointPosInWinPositions(bounce) == -1 && lifes <= 1){
 			n = 6;
 			lifes = 0;
 			score = 0;
@@ -212,4 +207,4 @@
 		}
 	}
 
-})();
+//})();
