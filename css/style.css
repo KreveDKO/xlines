@@ -15,15 +15,14 @@ body{
 	font-size: 18px;
 	color: #06688E;
 }
-.game-container{
+
+#c{
+	cursor: url(../image/crowbar.cur), pointer;
+	background-image:  url(../image/wall.jpg);
 	border: 1px solid black;
 }
-#c{
-	cursor: url(../image/scissors.cur), pointer;
-}
-#c:active
-{
-	cursor: pointer;
+#c:active{
+	cursor: url(../image/crowbar_active.cur),pointer;
 }
 .game-explantion{
 	margin-top: 60px;
