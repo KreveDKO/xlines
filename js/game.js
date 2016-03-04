@@ -1,4 +1,4 @@
-//;(function(){
+;(function(){
 	var canvas = document.getElementById('c');
 	var ctx = canvas.getContext('2d');
 	
@@ -7,7 +7,7 @@
 	//canvas.height = (document.documentElement.clientHeight || document.body.clientHeight) * 0.95;
 	
 	canvas.width = 800;
-	canvas.height = 1000;
+	canvas.height = 996;
 	canvas.addEventListener('mousedown', mouseClick);
 	canvas.addEventListener('mousemove', mouse);
 	canvas.addEventListener('touchstart',touchDown);
@@ -108,7 +108,7 @@
 		for (var i = 0; i < winPositions.length; i++) {
 			ctx.beginPath();
 			ctx.strokeStyle = GreenYellowRed[i]
-			ctx.arc(winPositions[i].x,winPositions[i].y,12,0,2*Math.PI);
+			ctx.arc(winPositions[i].x,winPositions[i].y,17,0,2*Math.PI);
 			ctx.lineWidth = 5;
 			ctx.stroke();
 			ctx.closePath();
@@ -122,16 +122,12 @@
 			else ctx.strokeStyle = '#012533';
 			ctx.stroke();
 			ctx.closePath();
-			/*ctx.beginPath();
-			ctx.arc(springs[i].x,springs[i].y,5,0,2*Math.PI);
-			ctx.fill();
-			ctx.closePath();*/
-			ctx.drawImage(nailTexture,springs[i].x-12,springs[i].y-10,25,25)
+			ctx.drawImage(nailTexture,springs[i].x-12,springs[i].y-10,20,20)
 			
 		}
 
 		ctx.beginPath();
-		ctx.arc(realBounce.x,realBounce.y,10,10,0,2*Math.PI);
+		ctx.arc(realBounce.x,realBounce.y,15,15,0,2*Math.PI);
 		ctx.fill();
 		ctx.closePath();
 		if (springs.length <= winPositions.length && (Math.abs(realBounce.x-bounce.x) <= 1) && (Math.abs(realBounce.y-bounce.y) <= 1))
@@ -207,4 +203,4 @@
 		}
 	}
 
-//})();
+})();

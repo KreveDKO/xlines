@@ -1,7 +1,8 @@
 body{
-	margin: 80px 0;
+	margin-top: 80px;
 	background: #5EAECC;
 	color: #06688E;
+	background-image:  url(../image/wallTexture.jpg);
 }
 .container{
 	width: 800px;
@@ -9,26 +10,42 @@ body{
 }
 .header{
 	color:#012533;
+	height: 120px;
 }
 .game-intro{
-	margin-top: 0;
+	margin-top: 0px;
 	font-size: 18px;
-	color: #06688E;
+
 }
 
 #c{
 	cursor: url(../image/crowbar.cur), pointer;
-	background-image:  url(../image/wall.jpg);
-	border: 1px solid black;
 }
 #c:active{
 	cursor: url(../image/crowbar_active.cur),pointer;
 }
+
+.explantion-container{
+	margin-top: 30px;
+	width: 600px;
+	margin: 0px auto;
+	height: 450px;
+	background-image:  url(../image/sign.png);
+	border: 1px dotted #9ad264;
+}	
+
 .game-explantion{
-	margin-top: 60px;
-	font-size: 18px;
+	
+	height: 280px;
+	width: 520px;
+	font-size: 26px;
+	margin: 75px auto;
+	color: #ecea45;
+	
 }
 .important{
-	color: #012533;
-	font-size: 18px;
+	color: #dbd945;
+	font-size: 30px;
 }
+
+
