@@ -3,11 +3,15 @@
 	var ctx = canvas.getContext('2d');
 	
 	myStorage = localStorage;
-	//canvas.width = (document.documentElement.clientWidth || document.body.clientWidth) * 0.95;
-	//canvas.height = (document.documentElement.clientHeight || document.body.clientHeight) * 0.95;
-	
-	canvas.width = 800;
-	canvas.height = 996;
+	if (screen.width <= screen.height)
+	{
+		canvas.width = 800;
+		canvas.height = 996;
+	}
+	else{
+		canvas.width = 1000;
+		canvas.height = 776;
+	}
 	canvas.addEventListener('mousedown', mouseClick);
 	canvas.addEventListener('mousemove', mouse);
 	canvas.addEventListener('touchstart',touchDown);
