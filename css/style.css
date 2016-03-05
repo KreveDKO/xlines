@@ -31,7 +31,7 @@ body{
 	margin: 0px auto;
 	height: 450px;
 	background-image:  url(../image/sign.png);
-	border: 1px dotted #9ad264;
+	padding: 1px;
 }	
 
 .game-explantion{
