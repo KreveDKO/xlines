@@ -2,7 +2,7 @@ body{
 	margin-top: 80px;
 	background: #5EAECC;
 	color: #06688E;
-	background-image:  url(../image/wallTexture.jpg);
+	background:  url(../image/wallTexture.jpg) center center no-repeat;
 }
 .container{
 	width: 800px;
@@ -26,20 +26,20 @@ body{
 }
 
 .explantion-container{
-	margin-top: 30px;
 	width: 600px;
-	margin: 0px auto;
-	height: 450px;
-	background-image:  url(../image/sign.png);
+	
+	margin: 30px auto 0px;
+	height: 480px;
+	background:  url(../image/sign.png);
 	padding: 1px;
 }	
 
 .game-explantion{
 	
 	height: 280px;
-	width: 520px;
-	font-size: 26px;
-	margin: 75px auto;
+	width: 500px;
+	font-size: 28px;
+	margin: 80px auto;
 	color: #ecea45;
 	
 }
