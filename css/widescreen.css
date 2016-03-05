@@ -1,7 +1,7 @@
 body{
 	margin-top: 80px;	
 	color: #06688E;
-	background:  url(../image/wallTexture.jpg) center 0 no-repeat;
+	background:  url(../image/wallTexture.jpg) center center no-repeat;
 }
 .container{
 	width: 1000px;
