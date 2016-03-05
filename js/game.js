@@ -188,14 +188,14 @@
 		return;
 
 		}
-		if (findPointPosInWinPositions(bounce) == -1 && lifes <= 1){
+		if (findPointPosInWinPositions(bounce) == -1 && lifes < 1){
 			n = 6;
 			lifes = 0;
 			score = 0;
 			newGame(n);
 			return;
 		}
-		if (findPointPosInWinPositions(bounce) == -1 && lifes > 0){
+		if (findPointPosInWinPositions(bounce) == -1 && lifes >= 1){
 			lifes -= 1;
 			score -= 25;
 			newGame(n)
