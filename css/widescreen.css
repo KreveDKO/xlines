@@ -4,7 +4,7 @@ body{
 	background:  url(../image/wallTexture.jpg) center 0 no-repeat;
 }
 .container{
-	width: 800px;
+	width: 1000px;
 	margin: 0 auto;
 }
 .header{
@@ -19,8 +19,6 @@ body{
 
 #c{
 	cursor: url(../image/crowbar.cur), pointer;
-	/*width: 800px;
-	height: 1000px;	*/
 }
 #c:active{
 	cursor: url(../image/crowbar_active.cur),pointer;

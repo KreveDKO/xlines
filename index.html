@@ -3,7 +3,16 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Game</title>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script>
+			if (screen.width <= screen.height)
+			{
+				document.write('<link rel="stylesheet" type="text/css" href="css/style.css">')
+			}
+			else{
+				document.write('<link rel="stylesheet" type="text/css" href="css/widescreen.css">')
+			}
+		</script>
+<!--		<link rel="stylesheet" type="text/css" href="css/style.css">-->
 	</head>
 	<body>
 		<div class="container">
