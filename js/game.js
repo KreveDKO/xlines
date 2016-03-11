@@ -12,6 +12,7 @@
 		canvas.width = 1000;
 		canvas.height = 776;
 	}
+	
 	canvas.addEventListener('mousedown', mouseClick);
 	canvas.addEventListener('mousemove', mouse);
 	canvas.addEventListener('touchstart',touchDown);
@@ -29,13 +30,24 @@
 	
 	if (myStorage.getItem('highScore') != undefined)
 		highScore = parseInt(myStorage.getItem('highScore'))
+	function checkNailPosition(x, y) {
+		for (var i = 0; i < springs.length; i++)
+			if (Math.abs(springs[i].x - x) < 75 && Math.abs(springs[i].y - y) < 75)
+				return true;
+		return false;
+	};
 	function newGame(n){
 		springs = [];
 		winPositions = [];
 		for (var i = 0; i < n; i++) {
+
 			var x = Math.floor((Math.random() * (canvas.width-280)) + 30);
 			var y = Math.floor((Math.random() * (canvas.height- 30)) + 30);
-			springs.push(new spring(x,y));
+			while  (checkNailPosition(x,y)){
+				x = Math.floor((Math.random() * (canvas.width-280)) + 30);
+				y = Math.floor((Math.random() * (canvas.height- 30)) + 30);
+			}
+			springs.push(new spring(x,y));			
 		};
 		changeBouncePos();
 		realBounce.x = bounce.x;
@@ -45,7 +57,7 @@
 			while (findPointPosInWinPositions(wp) != -1){wp = winPosition();}
 			winPositions.push(wp);
 		}        
-	}
+	};
 
 	function winPosition(){
 		var avgX = 0;
@@ -180,7 +192,7 @@
 	}
 	function roundOver(){
 
-		if (findPointPosInWinPositions(bounce) != -1){
+		if (findPointPosInWinPositions(bounce) != -1 && springs.length == 3){
 			n++;
 			score += (3-findPointPosInWinPositions(bounce))*50
 			lifes += (2-findPointPosInWinPositions(bounce)) * 0.5
