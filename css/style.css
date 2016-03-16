@@ -1,5 +1,6 @@
 body{
 	margin: 0px;
+	background: url('../image/grassTexture.png') center;
 }
 @font-face{
 	font-family: clouds;
@@ -46,10 +47,10 @@ body{
 }
 
 .explantion{
-	background: url(../image/grassTexture.png) no-repeat;
-	background-size: cover;
+	background: url(../image/bushTexture.png) center 0px;
+	
 	margin: -70px 0px;
-	height: 500px;
+	height: 285px;
 }
 .explantion-container{
 	width: 600px;	
