@@ -33,6 +33,7 @@ body{
 	padding: 1px;	
 	margin-top: -30px;	
 	background: url('../image/wallTexture.png') center 0px;
+	background-size: cover;
 }
 .game-container{
 	margin: 50px auto;	
