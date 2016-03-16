@@ -41,11 +41,11 @@
 		winPositions = [];
 		for (var i = 0; i < n; i++) {
 
-			var x = Math.floor((Math.random() * (canvas.width-280)) + 30);
-			var y = Math.floor((Math.random() * (canvas.height- 30)) + 30);
+			var x = Math.floor((Math.random() * (canvas.width-280)) + 50);
+			var y = Math.floor((Math.random() * (canvas.height- 100)) + 50);
 			while  (checkNailPosition(x,y)){
-				x = Math.floor((Math.random() * (canvas.width-280)) + 30);
-				y = Math.floor((Math.random() * (canvas.height- 30)) + 30);
+				x = Math.floor((Math.random() * (canvas.width-280)) + 50);
+				y = Math.floor((Math.random() * (canvas.height- 100)) + 50);
 			}
 			springs.push(new spring(x,y));			
 		};

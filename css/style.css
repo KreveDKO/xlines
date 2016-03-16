@@ -1,52 +1,97 @@
 body{
-	margin-top: 80px;	
-	color: #06688E;
-	background:  url(../image/wallTexture.jpg) center center no-repeat;
+	margin-top: 0px;
 }
-.container{
-	width: 800px;
-	margin: 0 auto;
+@font-face{
+	font-family: clouds;
+	src: url('../fonts/Clouds.ttf');
 }
 .header{
+	padding: 1px;
+	height: 200px;
+	background: url('../image/skyTexture.jpg') center center no-repeat;
+	background-size: cover;
+}
+.header-container{
 	color:#012533;
-	height: 120px;
+	height: 150px;
+	margin: 20px auto;
+	font-size: 28px;
+	font-family: clouds;
+	color: white;
+}
+.title{
+	font-size: 2.5em;
+	font-weight: bold;
+	margin-bottom: 25px;
 }
 .game-intro{
-	margin-top: 0px;
-	font-size: 18px;
-
+	margin-top: 0px;	
+	font-weight: bold;
 }
 
+.game{
+	padding: 1px;	
+	margin-top: -30px;	
+	background: url('../image/wallTexture.png') center 0px;
+	background-size: cover;
+}
+.game-container{
+	margin: 50px auto;	
+	height: 800px;
+}
 #c{
 	cursor: url(../image/crowbar.cur), pointer;
-	/*width: 800px;
-	height: 1000px;	*/
-}
+}	
 #c:active{
 	cursor: url(../image/crowbar_active.cur),pointer;
 }
 
+.explantion{
+	background: url(../image/grassTexture.png) no-repeat;
+	background-size: cover;
+	margin: -70px 0px;
+	height: 500px;
+}
 .explantion-container{
-	width: 600px;
-	
-	margin: 30px auto 0px;
+	width: 600px;	
+	margin: 0px auto 0px;
 	height: 480px;
-	background:  url(../image/sign.png);
+	background: url(../image/sign.png);
 	padding: 1px;
 }	
 
 .game-explantion{
-	
 	height: 280px;
 	width: 500px;
-	font-size: 26px;
+	font-size: 28px;
 	margin: 80px auto;
 	color: #ecea45;
-	
 }
 .important{
 	color: #dbd945;
 	font-size: 30px;
 }
 
+@media screen and (orientation: landscape){
+	.header-container{
+		width: 1000px;
+	}
+	.game{
+		height: 900px;
+	}
+	.game-container{
+		width: 1000px;	
+	}
+}
 
+@media screen and (orientation: portrait){
+	.header-container{
+		width: 800px;
+	}
+	.game{
+		height: 1150px;
+	}
+	.game-container{
+		width: 800px;	
+	}
+}
