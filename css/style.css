@@ -47,7 +47,7 @@ body{
 }
 
 .explantion{
-	background: url(../image/bushTexture.png) center 0px;
+	background: url(../image/bushTexture.png) center 0px no-repeat;
 	
 	margin: -70px 0px;
 	height: 285px;
