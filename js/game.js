@@ -176,7 +176,6 @@
 		}	
 	}
 	function touchDown(e){
-		e.preventDefault();
 		for (var i = 0; i < springs.length; i++) 
 		{
 			var dx = Math.abs(e.targetTouches[0].pageX - mobilerect.left - springs[i].x)
