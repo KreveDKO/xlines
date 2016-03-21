@@ -6,6 +6,10 @@ body{
 	font-family: clouds;
 	src: url('../fonts/Clouds.ttf');
 }
+@font-face{
+	font-family: painty;
+	src: url('../fonts/Paintyp.ttf');
+}
 .header{
 	padding: 1px;
 	height: 200px;
@@ -20,6 +24,45 @@ body{
 	font-family: clouds;
 	color: white;
 }
+.info{
+	height: 0px;
+	font-size: 2.5em;
+	font-family: painty;
+	color:darkred;
+}
+.info-container{
+	margin: 0px auto;
+	height: 0px;
+
+}
+.level-information{
+	position: relative;
+	top: 250px;
+	left: -125px;
+	width: 150px;
+	height: 100px;
+}
+.lifes-information{
+	position: relative;
+	top: 250px;
+	left: -125px;
+	width: 150px;
+	height: 100px;
+}
+.score-information{
+	position: relative;
+	top: 50px;
+	left: -125px;
+	width: 150px;
+	height: 100px;
+}
+.hscore-information{
+	position: relative;
+	top: 50px;
+	width: 150px;
+	height: 100px;
+}
+
 .title{
 	font-size: 2.5em;
 	font-weight: bold;
@@ -39,7 +82,9 @@ body{
 	margin: 50px auto;	
 	height: 800px;
 }
+
 #c{
+	
 	cursor: url(../image/crowbar.cur), pointer;
 }	
 #c:active{
@@ -47,7 +92,7 @@ body{
 }
 
 .explantion{
-	background: url(../image/bushTexture.png) center 0px no-repeat;
+	background: url(../image/bushTexture.png) center 0px;
 	
 	margin: -70px 0px;
 	height: 285px;
@@ -63,7 +108,7 @@ body{
 .game-explantion{
 	height: 280px;
 	width: 500px;
-	font-size: 26px;
+	font-size: 28px;
 	margin: 80px auto;
 	color: #ecea45;
 }
@@ -72,7 +117,28 @@ body{
 	font-size: 30px;
 }
 
+@media screen and (max-width: 1350px){
+	.header{
+		width: 1350px;
+	} 
+	.game{
+		width: 1350px;
+	}
+	.info{
+		width: 1350px;
+	}
+
+	.explantion{
+		width: 1350px;
+	}
+	
+
+}
 @media screen and (orientation: landscape){
+	#c{
+		width: 1000px;
+		height: 800px;
+	}
 	.header-container{
 		width: 1000px;
 	}
@@ -82,9 +148,21 @@ body{
 	.game-container{
 		width: 1000px;	
 	}
+	.info-container{
+		width: 1000px;
+	}
+	.score-information{
+		left: 1025px;
+	}
+	.hscore-information{
+		left: 1025px;
+	}
 }
-
 @media screen and (orientation: portrait){
+	#c{
+		width: 800px;
+		height: 1000px;
+	}
 	.header-container{
 		width: 800px;
 	}
@@ -93,5 +171,14 @@ body{
 	}
 	.game-container{
 		width: 800px;	
+	}	
+	.info-container{
+		width: 800px;
+	}
+	.score-information{
+		left: 825px;
+	}
+	.hscore-information{
+		left: 825px;
 	}
 }

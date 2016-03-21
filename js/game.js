@@ -1,21 +1,47 @@
 ;(function(){
-	var canvas = document.getElementById('c');
+	var canvas = document.getElementById('c');	
 	var ctx = canvas.getContext('2d');
-	
 	myStorage = localStorage;
-	if (screen.width <= screen.height)
-	{
-		canvas.width = 800;
-		canvas.height = 996;
-	}
-	else{
-		canvas.width = 1000;
-		canvas.height = 776;
+	var prevAngle = screen.orientation.angle % 180;
+	function setScreen(){	
+		angle = screen.orientation.angle % 180;
+		if (screen.width <= screen.height){
+				canvas.width = 800;
+				canvas.height = 1000;				
+			}
+			else{
+				canvas.width = 1000;
+				canvas.height = 800;
+			}		
+			//TODO: Rotating rectangle's coordinates
+			if (angle != prevAngle){
+						for (var i in springs){
+			
+							var buff = springs[i].x;
+							springs[i].x = springs[i].y;
+							springs[i].y = buff;
+						}
+						for (var i in winPositions){
+							var buff = winPositions[i].x;
+							winPositions[i].x = winPositions[i].y;
+							winPositions[i].y = buff;		
+						}
+						if (springs != undefined){
+							var buff = bounce.x;
+							bounce.x = bounce.y;
+							bounce.y = buff;
+							buff = realBounce.x;
+							realBounce.x = realBounce.y;
+							realBounce.y = buff;
+						}
+						prevAngle = angle}
 	}
 	
 	canvas.addEventListener('mousedown', mouseClick);
 	canvas.addEventListener('mousemove', mouse);
-	canvas.addEventListener('touchstart',touchDown);
+	canvas.addEventListener('touchstart',touchDown);	
+	// window.addEventListener('onchange',setScreen);
+	window.screen.orientation.onchange = function(){setScreen();};
 	
 	var springs = [];
 	var n = 6
@@ -26,6 +52,7 @@
 	var score = 0;
 	var highScore = 0;
 	var lifes = 0;
+	setScreen();
 	var mobilerect = canvas.getBoundingClientRect();
 	
 	if (myStorage.getItem('highScore') != undefined)
@@ -41,10 +68,10 @@
 		winPositions = [];
 		for (var i = 0; i < n; i++) {
 
-			var x = Math.floor((Math.random() * (canvas.width-280)) + 50);
+			var x = Math.floor((Math.random() * (canvas.width- 100)) + 50);
 			var y = Math.floor((Math.random() * (canvas.height- 100)) + 50);
 			while  (checkNailPosition(x,y)){
-				x = Math.floor((Math.random() * (canvas.width-280)) + 50);
+				x = Math.floor((Math.random() * (canvas.width- 100)) + 50);
 				y = Math.floor((Math.random() * (canvas.height- 100)) + 50);
 			}
 			springs.push(new spring(x,y));			
@@ -56,7 +83,12 @@
 			var wp = winPosition();
 			while (findPointPosInWinPositions(wp) != -1){wp = winPosition();}
 			winPositions.push(wp);
-		}        
+		}     
+		document.getElementById('level').textContent = n - 5;
+		document.getElementById('score').textContent = score;   
+		document.getElementById('highScore').textContent = highScore;
+		document.getElementById('lifes').textContent = lifes;
+
 	};
 
 	function winPosition(){
@@ -114,12 +146,6 @@
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 		changeRealBouncePos();
 
-		ctx.font="20px Georgia";
-		ctx.fillText("Level: "+(n-5),canvas.width-200, 30);
-		ctx.fillText("Score: "+score,canvas.width-200, 50);
-		ctx.fillText("High score: "+highScore,canvas.width-200, 70);
-		ctx.fillText("Lifes: "+lifes,canvas.width-200, 90);
-
 		GreenYellowRed = ['#76E42F','#FF9E34','#EB305F']
 		for (var i = 0; i < winPositions.length; i++) {
 			ctx.beginPath();
@@ -176,6 +202,7 @@
 		}	
 	}
 	function touchDown(e){
+		// e.preventDefault();
 		for (var i = 0; i < springs.length; i++) 
 		{
 			var dx = Math.abs(e.targetTouches[0].pageX - mobilerect.left - springs[i].x)
@@ -198,7 +225,7 @@
 		if (score > highScore){
 			highScore = score
 			myStorage.setItem('highScore',highScore)
-		}
+		}		
 		newGame(n);
 		return;
 
@@ -206,13 +233,14 @@
 		if (findPointPosInWinPositions(bounce) == -1 && lifes < 1){
 			n = 6;
 			lifes = 0;
-			score = 0;
+			score = 0;			
 			newGame(n);
 			return;
 		}
 		if (findPointPosInWinPositions(bounce) == -1 && lifes >= 1){
 			lifes -= 1;
 			score -= 25;
+
 			newGame(n)
 			return;
 		}
